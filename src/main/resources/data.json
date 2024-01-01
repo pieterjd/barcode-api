@@ -1,0 +1,173 @@
+[
+    {
+        "barcode": "5059319024837",
+        "descriptions": [
+            {
+                "locale": "nl_BE",
+                "text": "Maxi Kelloggs coco pops"
+            }
+        ]
+    },
+    {
+        "barcode": "5414972100791",
+        "descriptions": [
+            {
+                "locale": "nl_BE",
+                "text": "Devos Lemmens mayonaise met eieren 750 ml"
+            }
+        ]
+    },
+    {
+        "barcode": "5410056199200",
+        "descriptions": [
+            {
+                "locale": "nl_BE",
+                "text": "Devos Lemmens Argentina steak & grill 300 ml"
+            }
+        ]
+    },
+    {
+        "barcode": "3068320120263",
+        "descriptions": [
+            {
+                "locale": "nl_BE",
+                "text": "Evian 6 x 1.5l flessen"
+            }
+        ]
+    },
+    {
+        "barcode": "5414972105024",
+        "descriptions": [
+            {
+                "locale": "nl_BE",
+                "text": "imperial bakmeel zelfrijzend 1100g"
+            }
+        ]
+    },
+    {
+        "barcode": "5410018501720",
+        "descriptions": [
+            {
+                "locale": "nl_BE",
+                "text": "Anco zelfrijzende bloem 1 kg"
+            }
+        ]
+    },
+    {
+        "barcode": "5410028809601",
+        "descriptions": [
+            {
+                "locale": "nl_BE",
+                "text": "Anco vloeiende bloem sauzen en beslag"
+            }
+        ]
+    },
+    {
+        "barcode": "5410056196117",
+        "descriptions": [
+            {
+                "locale": "nl_BE",
+                "text": "imperial vanille suiker 10 keer 10g"
+            }
+        ]
+    },
+    {
+        "barcode": "5400141602005",
+        "descriptions": [
+            {
+                "locale": "nl_BE",
+                "text": "Boni Frieten voorgebakken in zonnebloem 1kg"
+            }
+        ]
+    },
+    {
+        "barcode": "7622210776372",
+        "descriptions": [
+            {
+                "locale": "nl_BE",
+                "text": "Prince Chocolade smaak 3x300g"
+            }
+        ]
+    },
+    {
+        "barcode": "7622210776266",
+        "descriptions": [
+            {
+                "locale": "nl_BE",
+                "text": "Prince Chocolade smaak 300g"
+            }
+        ]
+    },
+    {
+        "barcode": "5449000131836",
+        "descriptions": [
+            {
+                "locale": "nl_BE",
+                "text": "Coca Cola Zero Sugar 500m;"
+            }
+        ]
+    },
+    {
+        "barcode": "8710398601636",
+        "descriptions": [
+            {
+                "locale": "nl_BE",
+                "text": "Lays Paprika 45g"
+            }
+        ]
+    },
+    {
+        "barcode": "8710398500434",
+        "descriptions": [
+            {
+                "locale": "nl_BE",
+                "text": "Lays Paprika 275g"
+            }
+        ]
+    },
+    {
+        "barcode": "5400141323603",
+        "descriptions": [
+            {
+                "locale": "nl_BE",
+                "text": "Boni Chocolade broodjes 10 stuks 700g"
+            }
+        ]
+    },
+    {
+        "barcode": "8710398519030",
+        "descriptions": [
+            {
+                "locale": "nl_BE",
+                "text": "Pepsi Max Lime 6x33cl"
+            }
+        ]
+    },
+    {
+        "barcode": "8710398519023",
+        "descriptions": [
+            {
+                "locale": "nl_BE",
+                "text": "Pepsi Max Lime 33cl"
+            }
+        ]
+    },
+    {
+        "barcode": "3068320120256",
+        "descriptions": [
+            {
+                "locale": "nl_BE",
+                "text": "Evian 1.5l"
+            }
+        ]
+    },
+    {
+        "barcode": "8710398500410",
+        "descriptions": [
+            {
+                "locale": "nl_BE",
+                "text": "Lays Naturel 275g"
+            }
+        ]
+    }
+]

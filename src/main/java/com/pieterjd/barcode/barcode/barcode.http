@@ -1,0 +1,57 @@
+### Export all  barcodes
+GET http://localhost:8080/api/v1/barcode/export
+
+### POST a new barcode 
+POST http://localhost:8080/api/v1/barcode 
+Content-Type: application/json
+
+{
+    "barcode":"restclient",
+    "descriptions":[
+        {
+            "locale": "nl",
+            "text": "vanuit de VS code rest client"
+        }
+    ]
+}
+
+### POST add description to an existing barcode 
+POST http://localhost:8080/api/v1/barcode 
+Content-Type: application/json
+
+{
+    "id": 2,
+    "barcode": "restclient",
+    "descriptions": [
+      {
+        "id": 5,
+        "locale": "nl",
+        "text": "vanuit de VS code rest client"
+      },
+      {
+        "locale": "nl-BE",
+        "text": "vanuit de VS code rest client description toevoegen aan bestaande barcode"
+      }
+    ]
+  }
+
+### POST update existing description to an existing barcode 
+POST http://localhost:8080/api/v1/barcode 
+Content-Type: application/json
+
+{
+    "id": 2,
+    "barcode": "restclient",
+    "descriptions": [
+      {
+        "id": 5,
+        "locale": "nl",
+        "text": "vanuit de VS code rest client - verbetering"
+      },
+      {
+        "id": 6,
+        "locale": "nl-BE",
+        "text": "vanuit de VS code rest client description toevoegen aan bestaande barcode"
+      }
+    ]
+  }
