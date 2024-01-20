@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table;
 
 import com.pieterjd.barcode.barcode.Barcode;
 import com.pieterjd.barcode.barcode.BarcodeRef;
@@ -22,7 +21,7 @@ import lombok.ToString;
 @Setter
 @ToString
 
-@Table("CART")
+//@Table("CART")
 public class Cart {
     @Id
     private Long id;

@@ -169,5 +169,32 @@
                 "text": "Lays Naturel 275g"
             }
         ]
+    },
+    {
+        "barcode": "5400141366426",
+        "descriptions": [
+            {   
+                "locale": "nl_BE",
+                "text": "Friet en puree aardappelen 5 kg"
+            }
+        ]
+    },
+    {   
+        "barcode": "5400141323603",
+        "descriptions": [
+            {   
+                "locale": "nl_BE",
+                "text": "Chocolade broodjes 10 stuks"
+            }
+        ]
+    },
+    {
+        "barcode": "4002359016059",
+        "descriptions": [
+            {   
+                "locale": "nl_BE",
+                "text": "Ben's original zoetzure saus"
+            }
+        ]
     }
 ]
