@@ -22,7 +22,8 @@ import lombok.ToString;
 @Setter
 @ToString
 @Builder
-@EqualsAndHashCode@Entity
+@EqualsAndHashCode
+@Entity
 @Table(name="DESCRIPTION")
 public class Description {
     @Id
