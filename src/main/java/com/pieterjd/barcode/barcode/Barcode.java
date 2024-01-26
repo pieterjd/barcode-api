@@ -35,6 +35,16 @@ public class Barcode {
     @Column
     private String barcode;
     @Builder.Default
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true)
+    @OneToMany(mappedBy = "barcode", cascade = CascadeType.ALL, orphanRemoval=true)
     private Set<Description> descriptions = new HashSet<>();
+    public void addDescription(Description d) {
+        descriptions.add(d);
+        d.setBarcode(this);
+    }
+    public void removeDescription(Description d) {
+        descriptions.remove(d);
+        d.setBarcode(null);
+    }
+
+    
 }
