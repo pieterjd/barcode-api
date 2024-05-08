@@ -2,6 +2,7 @@ package com.pieterjd.barcode;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -31,8 +32,10 @@ public class JsonDataLoader {
 
     @PostConstruct
     public void readData() throws StreamReadException, DatabindException, IOException{
-        Barcode[] barcodes = mapper.readValue(resource.getInputStream(), Barcode[].class);
-        repository.saveAll(Arrays.asList(barcodes));
+        Barcode[] temp = mapper.readValue(resource.getInputStream(), Barcode[].class);
+        List<Barcode> barcodes = Arrays.asList(temp);
+        barcodes.forEach(bc -> bc.getDescriptions().stream().forEach(desc->desc.setBarcode(bc)));
+        repository.saveAll(barcodes);
 
     }
     
