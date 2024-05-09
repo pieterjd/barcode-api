@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <title>Barcodes</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+  </head>
+
+  <body>
+
+    <div>#barcodes: <span th:text="${#lists.size(barcodes)}"></span></div>
+    
+    
+    
+      <h2>List of Barcodes</h2>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Barcode</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="barcode : ${barcodes}">
+            <td th:text="${{barcode.barcode}}">barcode</td>
+            <td>
+              <table>
+                <tbody>
+                  <tr th:each="row,rowStat : ${barcode.descriptions}">
+                    <td th:text="${row.locale.language} + ' => ' + ${row.text}">Language</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+   
+
+
+
+
+  </body>
+</html>
