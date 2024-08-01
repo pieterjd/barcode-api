@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" 
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+  <title>Barcodes</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      plugins: [
+        "@tailwindcss/forms"
+      ],
+      theme: {
+        extend: {
+          colors: {
+            clifford: '#da373d',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="px-12 py-12">
+  <div class="relative overflow-x-auto">
+    <div th:replace="fragments/header :: header"></div>
+    content below between rulers only visible for logged in users.
+    <hr/>
+    <div sec:authorize="isAuthenticated()">
+      This content is only shown to authenticated users.
+    </div>
+    <hr/>
+    Visible for unauthenticated
+    <div sec:authorize="!isAuthenticated()">
+      This content is only shown to un-authenticated users.
+    </div>
+    
+   
+    <div th:replace="fragments/footer :: footer"></div>
+  </div>
+</body>
+
+</html>
