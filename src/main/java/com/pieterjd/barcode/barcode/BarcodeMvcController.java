@@ -40,7 +40,7 @@ public class BarcodeMvcController {
     @PostMapping("/add")
     public String postMethodName(@Valid @ModelAttribute("submission") AddBarcodeSubmission submission,BindingResult result,Model model) {
         if(result.hasErrors()){
-            return "barcodesAdd";
+            return "";
         }
         Description description = Description.builder()
             .locale(Locale.forLanguageTag(submission.getLocale()))
@@ -52,7 +52,9 @@ public class BarcodeMvcController {
         barcode.addDescription(description);
 
         barcodeRepository.save(barcode);
-        return "redirect:/barcodes/add";
+
+        model.addAttribute("barcode", barcode);
+        return "fragments/barcodeRow :: addBarcodeForm";
     }
     
     
