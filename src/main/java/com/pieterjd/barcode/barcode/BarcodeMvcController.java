@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import io.github.wimdeblauwe.htmx.spring.boot.mvc.HtmxResponse;
 import jakarta.validation.Valid;
 
 
@@ -37,25 +38,38 @@ public class BarcodeMvcController {
         return "barcodesAdd";
     }
 
+
     @PostMapping("/add")
-    public String postMethodName(@Valid @ModelAttribute("submission") AddBarcodeSubmission submission,BindingResult result,Model model) {
-        if(result.hasErrors()){
+    public HtmxResponse postMethodName(@Valid @ModelAttribute("submission") AddBarcodeSubmission submission,BindingResult result,Model model) {
+        // implemented as described at https://htmx.org/examples/update-other-content/#expand
+        if (result.hasErrors()) {
+            model.addAttribute("barcodes", barcodeRepository.findAll());
             model.addAttribute("submission", submission);
-            return "fragments/addBarcodeForm :: editBarcodeForm";
+            return HtmxResponse.builder()
+                    .view("barcodes :: barcodesTable")
+                    .view("fragments/addBarcodeForm :: editBarcodeForm")
+                    .trigger("barcodeSubmissionNotValidated")
+                    .build();
+
         }
         Description description = Description.builder()
-            .locale(Locale.forLanguageTag(submission.getLocale()))
-            .text(submission.getDescription())
-            .build();
+                .locale(Locale.forLanguageTag(submission.getLocale()))
+                .text(submission.getDescription())
+                .build();
         Barcode barcode = Barcode.builder()
-        .barcode(submission.getBarcode())
-        .build();
+                .barcode(submission.getBarcode())
+                .build();
         barcode.addDescription(description);
 
         barcodeRepository.save(barcode);
-
+        model.addAttribute("barcodes", barcodeRepository.findAll());
         model.addAttribute("barcode", barcode);
-        return "fragments/barcodeRow :: barcodeRow";
+
+        return HtmxResponse.builder()
+                .view("barcodes :: barcodesTable")
+                .view("fragments/addBarcodeForm :: addBarcodeForm")
+                .trigger("barcodeSubmissionValidated")
+                .build();
     }
     
     

@@ -27,30 +27,41 @@
 <body class="px-12 py-12">
   <div class="relative overflow-x-auto">
     <div th:replace="fragments/header :: header"></div>
-    <table id="barcodesTable" class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-        <tr>
-          <th scope="col" class="px-6 py-3">Barcode</th>
-          <th scope="col" class="px-6 py-3">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr th:each="barcode : ${barcodes}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-          <td scope="row" class="px-6 py-4" th:text="${{barcode.barcode}}">barcode</td>
-          <td scope="row" class="px-6 py-4">
+    <div id="table-and-form">
+      <table th:fragment="barcodesTable" id="barcodesTable" class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th scope="col" class="px-6 py-3">Barcode</th>
+            <th scope="col" class="px-6 py-3">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="barcode : ${barcodes}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <td scope="row" class="px-6 py-4" th:text="${{barcode.barcode}}">barcode</td>
+            <td scope="row" class="px-6 py-4">
 
-            <ul class="max-w-md text-gray-900" th:each="row,rowStat : ${barcode.descriptions}">
-              <li class="mb-1 text-gray-500 md:text-lg dark:text-gray-400 "><strong th:text="${row.locale.language}"
-                  class="font-semibold"></strong> <span th:text="${row.text}"></span></li>
-            </ul>
+              <ul class="max-w-md text-gray-900" th:each="row,rowStat : ${barcode.descriptions}">
+                <li class="mb-1 text-gray-500 md:text-lg dark:text-gray-400 "><strong th:text="${row.locale.language}"
+                    class="font-semibold"></strong> <span th:text="${row.text}"></span></li>
+              </ul>
 
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div th:replace="fragments/addBarcodeForm :: addBarcodeForm"></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div id="barcodeForm" th:insert="fragments/addBarcodeForm :: addBarcodeForm"></div>
+    </div>
     <div th:replace="fragments/footer :: footer"></div>
   </div>
+
+  <script>
+    document.body.addEventListener("barcodeSubmissionValidated", e => {
+      console.log("barcodeSubmissionValidated event triggered");
+    });
+    document.body.addEventListener("barcodeSubmissionNotValidated", e => {
+      console.log("barcodeSubmissionNotValidated event triggered");
+    });
+  </script>
 </body>
 
 </html>
