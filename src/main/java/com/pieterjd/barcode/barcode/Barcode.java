@@ -12,26 +12,24 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@ToString
+
 @Builder
 
 
 @Entity
 @Table(name = "BARCODE")
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+
 public class Barcode {
     @Id
     @GeneratedValue
     private Long id;    
-    @EqualsAndHashCode.Include
+
     @Column
     private String barcode;
     @Builder.Default
@@ -45,6 +43,31 @@ public class Barcode {
         descriptions.remove(d);
         d.setBarcode(null);
     }
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Barcode other = (Barcode) obj;
+        if (id == null) {
+            if (other.getId() != null)
+                return false;
+        } else if (!id.equals(other.getId()))
+            return false;
+        return true;
+    }
+
+    
 
     
 }

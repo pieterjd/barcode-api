@@ -11,26 +11,22 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.EqualsAndHashCode.Exclude;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
+
 @Builder
-@EqualsAndHashCode
+
 @Entity
 @Table(name="DESCRIPTION")
 public class Description {
     @Id
     @GeneratedValue
-    @Exclude
     private Long id;
     @Column
     private Locale locale;
@@ -38,5 +34,33 @@ public class Description {
     private String text;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    
     private Barcode barcode;
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Description other = (Description) obj;
+        if (id == null) {
+            if (other.getId() != null)
+                return false;
+        } else if (!id.equals(other.getId()))
+            return false;
+        return true;
+    }
+
+    
 }
