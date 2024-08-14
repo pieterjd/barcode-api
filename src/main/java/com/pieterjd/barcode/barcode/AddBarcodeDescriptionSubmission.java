@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AddBarcodeSubmission {
+public class AddBarcodeDescriptionSubmission {
     @NotEmpty
     @Size(min = 10)
     private String barcode="123456789";

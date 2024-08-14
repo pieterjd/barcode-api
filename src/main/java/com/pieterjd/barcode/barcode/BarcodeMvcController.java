@@ -34,20 +34,20 @@ public class BarcodeMvcController {
 
     @GetMapping("/add")
     public String barcodesSubmit(Model model){
-        model.addAttribute("submission", new AddBarcodeSubmission()) ;
+        model.addAttribute("submission", new AddBarcodeDescriptionSubmission()) ;
         return "barcodesAdd";
     }
 
 
     @PostMapping("/add")
-    public HtmxResponse postMethodName(@Valid @ModelAttribute("submission") AddBarcodeSubmission submission,BindingResult result,Model model) {
+    public HtmxResponse postMethodName(@Valid @ModelAttribute("submission") AddBarcodeDescriptionSubmission submission,BindingResult result,Model model) {
         // implemented as described at https://htmx.org/examples/update-other-content/#expand
         if (result.hasErrors()) {
             model.addAttribute("barcodes", barcodeRepository.findAll());
             model.addAttribute("submission", submission);
             return HtmxResponse.builder()
                     .view("barcodes :: barcodesTable")
-                    .view("fragments/addBarcodeForm :: editBarcodeForm")
+                    .view("fragments/addBarcodeDescriptionForm :: editBarcodeForm")
                     .trigger("barcodeSubmissionNotValidated")
                     .build();
 
@@ -67,7 +67,7 @@ public class BarcodeMvcController {
 
         return HtmxResponse.builder()
                 .view("barcodes :: barcodesTable")
-                .view("fragments/addBarcodeForm :: addBarcodeForm")
+                .view("fragments/addBarcodeDescriptionForm :: addBarcodeForm")
                 .trigger("barcodeSubmissionValidated")
                 .build();
     }
