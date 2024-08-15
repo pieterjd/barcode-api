@@ -19,16 +19,16 @@ import jakarta.validation.Valid;
 @Controller
 @RequestMapping("/barcodes")
 public class BarcodeMvcController {
-    private BarcodeRepository barcodeRepository;
+    private BarcodeService barcodeService;
 
-    public BarcodeMvcController(BarcodeRepository barcodeRepository) {
-        this.barcodeRepository = barcodeRepository;
+    public BarcodeMvcController(BarcodeService barcodeService) {
+        this.barcodeService = barcodeService;
     }
 
 
     @GetMapping
     public String barcodesHome(Model model){
-        model.addAttribute("barcodes", barcodeRepository.findAll(Pageable.unpaged()).getContent());
+        model.addAttribute("barcodes", barcodeService.findAll(Pageable.unpaged()).getContent());
         return "barcodes";
     }
 
@@ -43,7 +43,7 @@ public class BarcodeMvcController {
     public HtmxResponse postMethodName(@Valid @ModelAttribute("submission") AddBarcodeDescriptionSubmission submission,BindingResult result,Model model) {
         // implemented as described at https://htmx.org/examples/update-other-content/#expand
         if (result.hasErrors()) {
-            model.addAttribute("barcodes", barcodeRepository.findAll());
+            model.addAttribute("barcodes", barcodeService.findAll());
             model.addAttribute("submission", submission);
             return HtmxResponse.builder()
                     .view("barcodes :: barcodesTable")
@@ -56,13 +56,12 @@ public class BarcodeMvcController {
                 .locale(Locale.forLanguageTag(submission.getLocale()))
                 .text(submission.getDescription())
                 .build();
-        Barcode barcode = Barcode.builder()
-                .barcode(submission.getBarcode())
-                .build();
-        barcode.addDescription(description);
+        
 
-        barcodeRepository.save(barcode);
-        model.addAttribute("barcodes", barcodeRepository.findAll());
+        Barcode barcode = barcodeService.addDescription(submission.getBarcode(), description);
+
+        
+        model.addAttribute("barcodes", barcodeService.findAll());
         model.addAttribute("barcode", barcode);
 
         return HtmxResponse.builder()
