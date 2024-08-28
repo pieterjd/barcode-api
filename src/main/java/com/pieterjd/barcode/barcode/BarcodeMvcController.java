@@ -27,8 +27,8 @@ public class BarcodeMvcController {
 
 
     @GetMapping
-    public String barcodesHome(Model model){
-        model.addAttribute("barcodes", barcodeService.findAll(Pageable.unpaged()).getContent());
+    public String barcodesHome(Model model, Pageable pageable){
+        model.addAttribute("barcodes", barcodeService.findAll(pageable));
         return "barcodes";
     }
 
@@ -40,10 +40,10 @@ public class BarcodeMvcController {
 
 
     @PostMapping("/add")
-    public HtmxResponse postMethodName(@Valid @ModelAttribute("submission") AddBarcodeDescriptionSubmission submission,BindingResult result,Model model) {
+    public HtmxResponse postMethodName(@Valid @ModelAttribute("submission") AddBarcodeDescriptionSubmission submission,BindingResult result,Model model, Pageable pageable) {
         // implemented as described at https://htmx.org/examples/update-other-content/#expand
         if (result.hasErrors()) {
-            model.addAttribute("barcodes", barcodeService.findAll());
+            model.addAttribute("barcodes", barcodeService.findAll(pageable));
             model.addAttribute("submission", submission);
             return HtmxResponse.builder()
                     .view("barcodes :: barcodesTable")
@@ -61,12 +61,12 @@ public class BarcodeMvcController {
         Barcode barcode = barcodeService.addDescription(submission.getBarcode(), description);
 
         
-        model.addAttribute("barcodes", barcodeService.findAll());
+        model.addAttribute("barcodes", barcodeService.findAll(pageable));
         model.addAttribute("barcode", barcode);
 
         return HtmxResponse.builder()
                 .view("barcodes :: barcodesTable")
-                .view("fragments/addBarcodeDescriptionForm :: addBarcodeForm")
+                //.view("fragments/addBarcodeDescriptionForm :: addBarcodeForm")
                 .trigger("barcodeSubmissionValidated")
                 .build();
     }

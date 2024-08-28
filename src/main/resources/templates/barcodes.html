@@ -27,8 +27,8 @@
 <body class="px-12 py-12">
   <div class="relative overflow-x-auto">
     <div th:replace="fragments/header :: header"></div>
-    <div id="table-and-form">
-      <table th:fragment="barcodesTable" id="barcodesTable" class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+    <div id="table-and-form" th:fragment="barcodesTable">
+      <table id="barcodesTable" class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th scope="col" class="px-6 py-3">Barcode</th>
@@ -36,7 +36,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr th:each="barcode : ${barcodes}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+          <tr th:each="barcode : ${barcodes.content}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
             <td scope="row" class="px-6 py-4" th:text="${{barcode.barcode}}">barcode</td>
             <td scope="row" class="px-6 py-4">
 
@@ -49,6 +49,41 @@
           </tr>
         </tbody>
       </table>
+      
+      <div class="flex flex-col items-center">
+        <!-- Help text -->
+        <span class="text-sm text-gray-700 dark:text-gray-400">
+            Showing 
+            <span class="font-semibold text-gray-900 dark:text-white" th:text="${{barcodes.pageable.offset + 1}}">1</span> 
+            to 
+            <span class="font-semibold text-gray-900 dark:text-white" th:text="${{barcodes.pageable.offset + barcodes.numberOfElements}}">10</span> 
+            of 
+            <span class="font-semibold text-gray-900 dark:text-white" th:text="${{barcodes.totalElements}}">100</span> Entries
+        </span>
+        <div class="inline-flex mt-2 xs:mt-0">
+          <!-- Buttons -->
+          <a th:href="@{''(page=${barcodes.number - 1},size=${param.size != null ? param.size : barcodes.size})}"
+           th:if="${!barcodes.first}">
+          <button class="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+              <svg class="w-3.5 h-3.5 me-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4"/>
+              </svg>
+              Prev
+          </button>
+        </a>
+        <a th:href="@{''(page=${barcodes.number + 1},size=${param.size != null ? param.size : barcodes.size})}"
+        th:if="${!barcodes.last}">
+          <button class="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-gray-800 border-0 border-s border-gray-700 rounded-e hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+              Next
+              <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+            </svg>
+          </button>
+        </a>
+        </div>
+      </div>
+
+      
       <div id="barcodeForm" th:insert="fragments/addBarcodeDescriptionForm :: addBarcodeForm"></div>
     </div>
     <div th:replace="fragments/footer :: footer"></div>
