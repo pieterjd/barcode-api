@@ -12,7 +12,7 @@ public interface BarcodeRepository extends CrudRepository<Barcode, Long>,
                 @Query("""
                         select b 
                         from Barcode b
-                        join fetch b.descriptions
+                        left join fetch b.descriptions
                         where b.barcode = :barcode
                         """)
                 Optional<Barcode> findByBarcode(String barcode);

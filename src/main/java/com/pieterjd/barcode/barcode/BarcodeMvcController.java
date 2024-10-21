@@ -3,6 +3,8 @@ package com.pieterjd.barcode.barcode;
 import java.util.Locale;
 
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,7 +29,7 @@ public class BarcodeMvcController {
 
 
     @GetMapping
-    public String barcodesHome(Model model, Pageable pageable){
+    public String barcodesHome(Model model, Pageable pageable, @AuthenticationPrincipal UserDetails user){
         model.addAttribute("barcodes", barcodeService.findAll(pageable));
         return "barcodes";
     }
