@@ -13,6 +13,7 @@ public interface BarcodeRepository extends CrudRepository<Barcode, Long>,
                         select b 
                         from Barcode b
                         left join fetch b.descriptions
+                        left join fetch b.carts
                         where b.barcode = :barcode
                         """)
                 Optional<Barcode> findByBarcode(String barcode);

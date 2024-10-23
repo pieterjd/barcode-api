@@ -1,5 +1,7 @@
 package com.pieterjd.barcode.cart;
 
-public interface CartRepository /*extends CrudRepository<Cart, Long>*/{
+import org.springframework.data.repository.CrudRepository;
+
+public interface CartRepository extends CrudRepository<Cart, Long>{
     
 }

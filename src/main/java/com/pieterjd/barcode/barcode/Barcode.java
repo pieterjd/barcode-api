@@ -3,11 +3,14 @@ package com.pieterjd.barcode.barcode;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.pieterjd.barcode.cart.Cart;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -35,6 +38,11 @@ public class Barcode {
     @Builder.Default
     @OneToMany(mappedBy = "barcode", cascade = CascadeType.ALL, orphanRemoval=true)
     private Set<Description> descriptions = new HashSet<>();
+
+    @Builder.Default
+    @ManyToMany(mappedBy = "barcodes", cascade = CascadeType.ALL)
+    private Set<Cart> carts = new HashSet<>();
+
     public void addDescription(Description d) {
         descriptions.add(d);
         d.setBarcode(this);

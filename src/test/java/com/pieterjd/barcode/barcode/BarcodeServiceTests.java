@@ -29,7 +29,7 @@ public class BarcodeServiceTests {
 
     @Test
     void testAddDescriptionWithExistingBarcode() {
-        Barcode existingBarcode = new Barcode(null, "1234567890", new HashSet<>());
+        Barcode existingBarcode = new Barcode(null, "1234567890", new HashSet<>(), new HashSet<>());
         assertNull(existingBarcode.getId());
         existingBarcode = barcodeRepository.save(existingBarcode);
         assertNotNull(existingBarcode.getId());

@@ -7,12 +7,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+
 
 @Configuration
 @EnableWebSecurity
@@ -38,7 +41,13 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsManager userManager() {
-        return new JdbcUserDetailsManager(datasource);
+        UserDetailsManager userDetailsManager =  new JdbcUserDetailsManager(datasource);
+        userDetailsManager.createUser(User.builder()
+        .username("admin")
+        .password(passwordEncoder().encode("admin"))
+        .roles("USER","ADMIN")
+        .build());
+        return userDetailsManager;
         /*
          * return new InMemoryUserDetailsManager(
          * new User("admin",
