@@ -1,5 +1,6 @@
 package com.pieterjd.barcode.barcode;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
@@ -17,5 +18,7 @@ public interface BarcodeRepository extends CrudRepository<Barcode, Long>,
                         where b.barcode = :barcode
                         """)
                 Optional<Barcode> findByBarcode(String barcode);
+
+                List<Barcode> findByBarcodeStartingWith(String prefix);
 
 }

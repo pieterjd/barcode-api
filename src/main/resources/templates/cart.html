@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+  <title>Cart</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/htmx.org@2.0.1"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      plugins: [
+        "@tailwindcss/forms"
+      ],
+      theme: {
+        ewxtend: {
+          colors: {
+            clifford: '#da373d',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="px-12 py-12">
+  <div class="relative overflow-x-auto">
+    <div th:replace="fragments/header :: header"></div>
+  </div>
+  <div class="min-w-0 flex-1">
+    <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">Carts</h2>
+    <div  th:replace="fragments/cart :: cart">
+      
+    </div>
+    <div>
+      <span class="htmx-indicator"> 
+        Searching... 
+       </span> 
+      <label for="search" class="block text-sm font-medium leading-6 text-gray-900">Search</label>
+      <div class="relative mt-2 rounded-md shadow-sm">
+        <input type="search" name="search"
+          class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          placeholder="Begin typing to search barcodes ..." 
+          hx:get="@{/carts/{id}/search(id=${cart.id})}"
+          hx-trigger="input changed delay:500ms, search" hx-target="#search-results" hx-indicator=".htmx-indicator">
+
+      </div>
+      <table  class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th scope="col" class="px-6 py-3">Barcode</th>
+            <th scope="col" class="px-6 py-3">Description</th>
+          </tr>
+        </thead>
+        <tbody id="search-results">
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="relative overflow-x-auto">
+    <div th:replace="fragments/footer :: footer"></div>
+  </div>
+
+
+</body>
+
+</html>

@@ -31,10 +31,10 @@ public class SecurityConfig {
         return http
                 .userDetailsService(userManager())
                 .formLogin(Customizer.withDefaults())
-                .authorizeHttpRequests(ahr -> ahr.requestMatchers("/login", "/hello", "/h2-console/**").permitAll()
+                .authorizeHttpRequests(ahr -> ahr.requestMatchers("/login", "/hello", "/h2-console/**","/carts/**","/barcodes/**").permitAll()
                         .anyRequest().authenticated())
                 .csrf(csrf -> csrf
-                        .ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")))
+                        .ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**"),AntPathRequestMatcher.antMatcher("/carts/**")))
                 .headers(headers -> headers.frameOptions().disable())
                 .build();
     }

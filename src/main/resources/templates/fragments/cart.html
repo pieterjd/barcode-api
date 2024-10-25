@@ -1,0 +1,9 @@
+<div id="cart-info" th:fragment="cart">
+    <p>createdAt: <span th:text="${#temporals.format(cart.createdAt, 'dd MMM yyyy')}"></span> at <span th:text="${#temporals.format(cart.createdAt, 'HH:mm')}"></span></p>
+    <p># barcodes in cart: <span th:text="${cart.barcodes.size}"></span></p>
+    <p>
+    <ul class="list-disc" >
+        <li th:each="description : ${cart.groupedContent}"><span th:text="${description.key}"></span> x <span th:text="${description.value}"></span></li>
+    </ul>
+    </p>
+</div>

@@ -1,5 +1,7 @@
 package com.pieterjd.barcode.barcode;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,12 @@ public class BarcodeService {
     public Iterable<Barcode> findAll() {
         return barcodeRepository.findAll();
     }
+
+    public List<Barcode> findByBarcodeStartingWith(String prefix) {
+        return barcodeRepository.findByBarcodeStartingWith(prefix);
+    }
+
+    
 
     
     

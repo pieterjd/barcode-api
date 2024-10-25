@@ -1,0 +1,16 @@
+<tr th:fragment="resultRows" th:each="barcode : ${barcodes}"
+    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+    <td scope="row" class="px-6 py-4" th:text="${{barcode.barcode}}">barcode</td>
+    <td scope="row" class="px-6 py-4">
+
+        <ul class="max-w-md text-gray-900" th:each="row,rowStat : ${barcode.descriptions}">
+            <li class="mb-1 text-gray-500 md:text-lg dark:text-gray-400 "><strong th:text="${row.locale.language}"
+                    class="font-semibold"></strong> <span th:text="${row.text}"></span></li>
+        </ul>
+
+    </td>
+    <td><button class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
+        hx:post="@{/carts/{id}/add/{barcode}(id=${cart.id}, barcode=${barcode.barcode})}" hx-swap="outerHTML" hx-target="#cart-info">Add to cart
+        
+      </button></td>
+</tr>
