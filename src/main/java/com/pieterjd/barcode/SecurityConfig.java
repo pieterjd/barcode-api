@@ -8,12 +8,15 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import com.pieterjd.barcode.user.UserDetailsServiceImpl;
 
 
 
@@ -27,11 +30,11 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http, UserDetailsServiceImpl userDetailsService) throws Exception {
         return http
-                .userDetailsService(userManager())
+                .userDetailsService(userDetailsService)
                 .formLogin(Customizer.withDefaults())
-                .authorizeHttpRequests(ahr -> ahr.requestMatchers("/login", "/hello", "/h2-console/**","/carts/**","/barcodes/**").permitAll()
+                .authorizeHttpRequests(ahr -> ahr.requestMatchers("/login", "/hello", "/h2-console/**","/barcodes/**").permitAll()
                         .anyRequest().authenticated())
                 .csrf(csrf -> csrf
                         .ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**"),AntPathRequestMatcher.antMatcher("/carts/**")))
@@ -59,6 +62,7 @@ public class SecurityConfig {
          */
     }
 
+    
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
