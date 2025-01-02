@@ -5,14 +5,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.pieterjd.barcode.barcode.Barcode;
+import com.pieterjd.barcode.user.User;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -47,6 +50,10 @@ public class Cart {
     private LocalDateTime createdAt = LocalDateTime.now();
     @Column
     private Locale locale;
+
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 
     public void addBarcode(Barcode b) {
         barcodes.add(b);

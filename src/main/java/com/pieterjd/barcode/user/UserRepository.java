@@ -13,6 +13,7 @@ public interface UserRepository extends CrudRepository<User, String> {
             select u
             from User u
             left join fetch u.authorities
+            left join fetch u.carts
             where u.userName = :userName
             """)
     Optional<User> findByUsername(String userName);

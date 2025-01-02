@@ -1,5 +1,6 @@
 package com.pieterjd.barcode.user;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -20,6 +21,8 @@ import java.util.Set;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.pieterjd.barcode.cart.Cart;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -47,6 +50,20 @@ public class User implements UserDetails {
     @Column(name = "AUTHORITY")
     @Builder.Default
     private Set<Authority> authorities = new HashSet<>();
+
+    @Builder.Default
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval=true)
+    private Set<Cart> carts = new HashSet<>();
+
+    public void addCart(Cart cart){
+        carts.add(cart);
+        cart.setUser(this);
+    }
+
+    public void removeCart(Cart cart){
+        carts.remove(cart);
+        cart.setUser(null);
+    }
 
     @Override
     public String getUsername() {

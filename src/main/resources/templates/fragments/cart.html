@@ -1,5 +1,5 @@
 <div id="cart-info" th:fragment="cart">
-    <p>createdAt: <span th:text="${#temporals.format(cart.createdAt, 'dd MMM yyyy')}"></span> at <span th:text="${#temporals.format(cart.createdAt, 'HH:mm')}"></span></p>
+    <p>createdAt: <span th:text="${#temporals.format(cart.createdAt, 'dd MMM yyyy')}"></span> at <span th:text="${#temporals.format(cart.createdAt, 'HH:mm')}"></span> for user <span th:text="${cart.user.username}"></span></p>
     <p># barcodes in cart: <span th:text="${cart.barcodes.size}"></span></p>
     <p>
     <ul class="list-disc" >
